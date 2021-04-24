@@ -1,10 +1,9 @@
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import ImageUploading from "react-images-uploading";
+import storage from "../firebase";
 import "./create.style.css";
-
 import axios from "axios";
-
 import MyNav from "../components/Navbar/MyNav";
 
 const Create = () => {
@@ -21,24 +20,45 @@ const Create = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		try {
-			const res = await axios({
-				url: "http://localhost:8080/api/item",
-				method: "POST",
-				data: {
-					name: form.name,
-					price: form.price,
-					type: form.type,
-				},
-			});
+		const image = images[0];
 
-			if (res.data.success) {
-				alert("Item added!!");
-				setForm({ name: "", price: "" });
+		if (image && form.name) {
+			try {
+				const imgUrl = await uploadFile(image.file);
+
+				const res = await axios({
+					url: "http://localhost:8080/api/item",
+					method: "POST",
+					data: {
+						name: form.name,
+						price: form.price,
+						type: form.type,
+						imgUrl: imgUrl,
+					},
+				});
+
+				if (res.data.success) {
+					alert("Item added!!");
+					setForm({ name: "", price: "" });
+				}
+			} catch (err) {
+				console.log(err);
 			}
-		} catch (err) {
-			console.log(err);
 		}
+	};
+
+	const uploadFile = (file) => {
+		return new Promise((resolve, reject) => {
+			const uploadTask = storage.ref().child(file.name).put(file);
+			const onProgress = () => {};
+			const onError = (err) => reject(err);
+			const onSuccess = () => {
+				uploadTask.snapshot.ref
+					.getDownloadURL()
+					.then((downloadURL) => resolve(downloadURL));
+			};
+			uploadTask.on("state_changed", onProgress, onError, onSuccess);
+		});
 	};
 
 	const onImageChange = (imageList, addUpdateIndex) => {
