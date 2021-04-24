@@ -50,10 +50,10 @@ const Create = () => {
 			<Container md={6} className="mt-3" fluid>
 				<Form onSubmit={handleSubmit}>
 					<Row>
-						<Col md={3}></Col>
+						<Col md={4}></Col>
 						<Col
 							xs={6}
-							md={3}
+							md={2}
 							className="d-flex align-items-center justify-content-center"
 						>
 							<div className="mb-3">
@@ -101,7 +101,7 @@ const Create = () => {
 								</ImageUploading>
 							</div>
 						</Col>
-						<Col xs={6} md={3}>
+						<Col xs={6} md={2}>
 							<Form.Group controlId="formName">
 								<Form.Label>Name</Form.Label>
 								<Form.Control
@@ -138,7 +138,7 @@ const Create = () => {
 								Submit
 							</Button>
 						</Col>
-						<Col md={3}></Col>
+						<Col md={4}></Col>
 					</Row>
 				</Form>
 			</Container>
