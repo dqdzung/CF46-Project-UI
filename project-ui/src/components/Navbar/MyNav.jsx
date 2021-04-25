@@ -11,11 +11,16 @@ const MyNav = () => {
 					</Link>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
-						<Nav className="mr-auto">
+						<Nav.Item className="mr-2  ">
+							<Link to="/">
+								<Navbar.Text>Home</Navbar.Text>
+							</Link>
+						</Nav.Item>
+						<Nav.Item>
 							<Link to="/create">
 								<Navbar.Text>Create</Navbar.Text>
 							</Link>
-						</Nav>
+						</Nav.Item>
 					</Navbar.Collapse>
 				</Container>
 			</Navbar>

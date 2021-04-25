@@ -1,10 +1,9 @@
 import { Form, Button, Container, Row, Col } from "react-bootstrap";
 import { useState } from "react";
 import ImageUploading from "react-images-uploading";
-import storage from "../firebase";
+import storage from "../../firebase";
 import "./create.style.css";
 import axios from "axios";
-import MyNav from "../components/Navbar/MyNav";
 
 const Create = () => {
 	const [form, setForm] = useState({ name: "", price: "", type: "food" });
@@ -66,8 +65,7 @@ const Create = () => {
 	};
 	return (
 		<div>
-			<MyNav></MyNav>
-			<Container md={6} className="mt-3" fluid>
+			<Container className="mt-3" fluid>
 				<Form onSubmit={handleSubmit}>
 					<Row>
 						<Col md={4}></Col>

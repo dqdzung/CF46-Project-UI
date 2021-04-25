@@ -1,0 +1,14 @@
+.badge {
+	border-radius: 0px;
+}
+
+.item-card .card-body {
+	text-align: center;
+	padding: 5px;
+}
+
+.badge-container {
+	position: absolute;
+	top: 5px;
+	right: 0;
+}
