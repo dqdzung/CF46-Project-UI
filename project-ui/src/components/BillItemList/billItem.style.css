@@ -13,3 +13,7 @@
 .button-container Button {
 	width: 100%;
 }
+
+.total-wrapper {
+	font-size: 40px;
+}

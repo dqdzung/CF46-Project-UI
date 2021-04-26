@@ -4,38 +4,67 @@ import { Row, Col, CardDeck, Container } from "react-bootstrap";
 import axios from "axios";
 import ItemList from "../../components/ItemList/ItemList";
 import BillItemList from "../../components/BillItemList/BillItemList";
+import Loading from "../../components/Loading/Loading";
+import "./table.style.css";
 
 const Table = () => {
 	const [items, setItems] = useState([]);
 	const [billItems, setBillItems] = useState([]);
+	const [loading, setLoading] = useState(true);
+
+	const { id } = useParams();
+	const tableId = id;
 
 	const fetchItems = async () => {
 		try {
 			const res = await axios({
-				url: "http://localhost:8080/api/item",
+				url: `http://localhost:8080/api/item`,
 				method: "GET",
 			});
 
 			if (res.data.success) {
 				setItems(res.data.data);
+				setLoading(false);
 			}
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	const fetchTableBill = async () => {
+		try {
+			const res = await axios({
+				url: `http://localhost:8080/api/bill/${tableId}`,
+				method: "GET",
+			});
+
+			if (res.data.success) {
+				const { items } = res.data.data;
+				setBillItems(items);
+			}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
 	useEffect(() => {
 		fetchItems();
+		fetchTableBill();
 	}, []);
 
-	const handleClick = (item) => {
+	const handleAddBill = (item) => {
 		if (billItems.some((elem) => elem.id === item._id)) {
-			return console.log("matched");
+			return console.log(billItems);
 		}
 		setBillItems((prevState) => {
-			return [
-				...prevState,
-				{ id: item._id, name: item.name, price: item.price, quantity: 1 },
-			];
+			const newBillItem = {
+				id: item._id,
+				name: item.name,
+				price: item.price,
+				quantity: 1,
+			};
+
+			return [...prevState, newBillItem];
 		});
 	};
 
@@ -54,21 +83,42 @@ const Table = () => {
 		setBillItems(updated);
 	};
 
-	const handleSubmitOrder = (e) => {
-		console.log(billItems);
+	const handleSubmitOrder = async (total) => {
+		console.log(billItems, total, tableId);
+
+		try {
+			const res = await axios({
+				url: "http://localhost:8080/api/bill",
+				method: "POST",
+				data: {
+					items: billItems,
+					total: total,
+					table: tableId,
+				},
+			});
+
+			if (res.data.success) {
+				alert("Order submitted!!");
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
-	const { id } = useParams();
 	return (
-		<Container className="mt-3" fluid>
-			<Row>
-				<Col xs={6} md={8}>
-					<h2>Table {id}</h2>
-					<CardDeck>
-						<ItemList items={items} onClick={handleClick}></ItemList>
-					</CardDeck>
+		<Container fluid>
+			<Row className="p-2">
+				<Col className="table-wrapper" xs={6} md={8}>
+					<h2>Table {tableId}</h2>
+					{loading ? (
+						<Loading></Loading>
+					) : (
+						<CardDeck>
+							<ItemList items={items} onClick={handleAddBill}></ItemList>
+						</CardDeck>
+					)}
 				</Col>
-				<Col xs={6} md={4}>
+				<Col className="table-wrapper" xs={6} md={4}>
 					<h2>Bill</h2>
 					<BillItemList
 						items={billItems}

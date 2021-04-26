@@ -19,7 +19,7 @@ const Item = ({ item, onClick, onValueChange }) => {
 					onChange={handleChange}
 				/>
 			</Col>
-			<Col md={3}>x {item.price * item.quantity}k</Col>
+			<Col md={3}>x {item.price}k</Col>
 			<Col md={2} className="delete" onClick={onClick}>
 				X
 			</Col>
@@ -30,7 +30,11 @@ const Item = ({ item, onClick, onValueChange }) => {
 const BillItemList = (props) => {
 	const items = props.items;
 
-	const [isOrdered, setOrdered] = useState(false);
+	let total;
+	if (items.length > 0) {
+		const totalArr = items.map((elem) => elem.price * elem.quantity);
+		total = totalArr.reduce((total, amount) => total + amount);
+	}
 
 	const listItems = items.map((item, index) => (
 		<Item
@@ -46,14 +50,27 @@ const BillItemList = (props) => {
 	return (
 		<Form>
 			{listItems}
-			<div className="button-container d-flex justify-content-center mt-4">
-				<Button className="m-1" onClick={props.onClickOrder}>
-					Order
-				</Button>
-				<Button variant="success" className="m-1">
-					Check Out
-				</Button>
-			</div>
+			{items.length > 0 && (
+				<>
+					<Row className="total-wrapper">
+						<Col>Total:</Col>
+						<Col className="text-right">{total}</Col>
+					</Row>
+					<div className="button-container d-flex justify-content-center mt-4">
+						<Button
+							className="m-1"
+							onClick={() => {
+								props.onClickOrder(total);
+							}}
+						>
+							Order
+						</Button>
+						<Button variant="success" className="m-1">
+							Check Out
+						</Button>
+					</div>
+				</>
+			)}
 		</Form>
 	);
 };
