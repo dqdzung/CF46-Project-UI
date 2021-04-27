@@ -45,8 +45,8 @@ const Home = () => {
 	const numbers = [1, 2, 3, 4, 5];
 
 	return (
-		<div id="container" className="p-5">
-			<Container className="mt-3" fluid>
+		<div id="container" className="p-5 ">
+			<Container className="mt-3 d-flex justify-content-center" fluid>
 				<CardDeck>
 					<CardList numbers={numbers} />
 				</CardDeck>
