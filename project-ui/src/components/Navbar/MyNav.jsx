@@ -1,14 +1,21 @@
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import icon from "./icon.png";
 
 const MyNav = () => {
 	return (
 		<div>
 			<Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
 				<Container>
-					<Link to="/">
-						<Navbar.Brand>Navbar</Navbar.Brand>
-					</Link>
+					<Navbar.Brand>
+						<img
+							src={icon}
+							width="30"
+							height="30"
+							className="d-inline-block align-top"
+							alt="logo"
+						/>
+					</Navbar.Brand>
 					<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 					<Navbar.Collapse id="responsive-navbar-nav">
 						<Nav.Item className="mr-2  ">
