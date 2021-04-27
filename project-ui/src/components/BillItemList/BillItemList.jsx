@@ -2,10 +2,11 @@ import { Row, Col, Form, Button } from "react-bootstrap";
 import { useState } from "react";
 import "./billItem.style.css";
 
-const Item = ({ item, onClick, onValueChange }) => {
+const Item = ({ item, onClick, onValueChange, setDisable }) => {
 	const handleChange = (e) => {
 		const value = e.target.value;
 		onValueChange(value);
+		setDisable(false);
 	};
 	return (
 		<Row item={item} className="p-2">
@@ -14,7 +15,7 @@ const Item = ({ item, onClick, onValueChange }) => {
 				<input
 					className="quantity"
 					type="number"
-					min="1"
+					min={item.quantity}
 					value={item.quantity}
 					onChange={handleChange}
 				/>
@@ -28,6 +29,7 @@ const Item = ({ item, onClick, onValueChange }) => {
 };
 
 const BillItemList = (props) => {
+	const [disable, setDisable] = useState(false);
 	const items = props.items;
 
 	let total;
@@ -44,6 +46,7 @@ const BillItemList = (props) => {
 				props.onClick(index);
 			}}
 			onValueChange={(value) => props.onChange(item.id, value)}
+			setDisable={setDisable}
 		/>
 	));
 
@@ -61,7 +64,9 @@ const BillItemList = (props) => {
 							className="m-1"
 							onClick={() => {
 								props.onClickOrder(total);
+								setDisable(!disable);
 							}}
+							disabled={disable}
 						>
 							Order
 						</Button>
