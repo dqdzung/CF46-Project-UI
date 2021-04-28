@@ -8,6 +8,8 @@ import Home from "./pages/Home/Home";
 import Table from "./pages/Table/Table";
 import Loading from "./components/Loading/Loading";
 import Login from "./pages/Login/Login";
+import SignUp from "./pages/SignUp/SignUp";
+import Protected from "./components/Route/Protected";
 
 export const AuthContext = createContext();
 
@@ -52,20 +54,20 @@ function App() {
 				<Router>
 					<MainLayout>
 						<Switch>
-							<Route path="/" exact>
+							<Protected path="/" exact>
 								<Home></Home>
-							</Route>
-							<Route path="/create">
+							</Protected>
+							<Protected path="/create">
 								<Create></Create>
-							</Route>
-							<Route path="/table/:id">
+							</Protected>
+							<Protected path="/table/:id">
 								<Table></Table>
-							</Route>
+							</Protected>
 							<Route path="/login">
 								<Login></Login>
 							</Route>
 							<Route path="/signup">
-								<h1>Sign Up</h1>
+								<SignUp></SignUp>
 							</Route>
 							<Route path="*">
 								<h1>404</h1>
