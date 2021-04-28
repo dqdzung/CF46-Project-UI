@@ -1,0 +1,14 @@
+.auth-layout {
+	height: calc(100vh - 56px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.auth-layout .form-wrapper {
+	background-color: #ffffff;
+	padding: 48px;
+	width: 500px;
+	border: solid black;
+	border-radius: 20px;
+}

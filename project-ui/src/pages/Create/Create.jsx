@@ -26,7 +26,7 @@ const Create = () => {
 				const imgUrl = await uploadFile(image.file);
 
 				const res = await axios({
-					url: "http://localhost:8080/api/item",
+					url: `${process.env.REACT_APP_BASE_URL}/api/item`,
 					method: "POST",
 					data: {
 						name: form.name,

@@ -18,7 +18,7 @@ const Table = () => {
 	const fetchItems = async () => {
 		try {
 			const res = await axios({
-				url: `http://localhost:8080/api/item`,
+				url: `${process.env.REACT_APP_BASE_URL}/api/item`,
 				method: "GET",
 			});
 
@@ -34,7 +34,7 @@ const Table = () => {
 	const fetchTableBill = async () => {
 		try {
 			const res = await axios({
-				url: `http://localhost:8080/api/bill/${tableId}`,
+				url: `${process.env.REACT_APP_BASE_URL}/api/bill/${tableId}`,
 				method: "GET",
 			});
 
@@ -88,7 +88,7 @@ const Table = () => {
 
 		try {
 			const res = await axios({
-				url: "http://localhost:8080/api/bill",
+				url: `${process.env.REACT_APP_BASE_URL}/api/bill`,
 				method: "POST",
 				data: {
 					items: billItems,

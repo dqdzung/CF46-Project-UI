@@ -7,6 +7,7 @@ import Create from "./pages/Create/Create";
 import Home from "./pages/Home/Home";
 import Table from "./pages/Table/Table";
 import Loading from "./components/Loading/Loading";
+import Login from "./pages/Login/Login";
 
 export const AuthContext = createContext();
 
@@ -54,11 +55,17 @@ function App() {
 							<Route path="/" exact>
 								<Home></Home>
 							</Route>
-							<Route path="/create" exact>
+							<Route path="/create">
 								<Create></Create>
 							</Route>
-							<Route path="/table/:id" exact>
+							<Route path="/table/:id">
 								<Table></Table>
+							</Route>
+							<Route path="/login">
+								<Login></Login>
+							</Route>
+							<Route path="/signup">
+								<h1>Sign Up</h1>
 							</Route>
 							<Route path="*">
 								<h1>404</h1>

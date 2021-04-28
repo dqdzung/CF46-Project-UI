@@ -10,7 +10,7 @@ const CardList = (props) => {
 	const fetchBills = async () => {
 		try {
 			const res = await axios({
-				url: `http://localhost:8080/api/bill`,
+				url: `${process.env.REACT_APP_BASE_URL}/api/bill`,
 				method: "GET",
 			});
 
