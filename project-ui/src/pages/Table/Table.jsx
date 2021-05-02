@@ -11,6 +11,8 @@ const Table = () => {
 	const [items, setItems] = useState([]);
 	const [billItems, setBillItems] = useState([]);
 	const [loading, setLoading] = useState(true);
+	const [term, setTerm] = useState("");
+	const [results, setResults] = useState([]);
 
 	const { id } = useParams();
 	const tableId = id;
@@ -123,16 +125,39 @@ const Table = () => {
 		}
 	};
 
+	const handleSearchInput = (e) => {
+		setTerm(e.target.value);
+		const results = items.filter((elem) => {
+			return elem.name.toLowerCase().includes(e.target.value.toLowerCase());
+		});
+		setResults(results);
+	};
+
 	return (
 		<Container fluid>
 			<Row className="p-2">
 				<Col className="table-wrapper" xs={6} md={8}>
-					<h2>Table {tableId}</h2>
+					<Row className="mb-2">
+						<Col xs={6} md={3}>
+							<h2>Table {tableId}</h2>
+						</Col>
+						<Col className="m-2 d-flex justify-content-center" xs={6} md={8}>
+							<input
+								className="search-input"
+								type="text"
+								placeholder="Search"
+								onChange={handleSearchInput}
+							/>
+						</Col>
+					</Row>
 					{loading ? (
 						<Loading></Loading>
 					) : (
 						<CardDeck>
-							<ItemList items={items} onClick={handleAddBill}></ItemList>
+							<ItemList
+								items={term ? results : items}
+								onClick={handleAddBill}
+							></ItemList>
 						</CardDeck>
 					)}
 				</Col>

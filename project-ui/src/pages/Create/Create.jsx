@@ -72,7 +72,7 @@ const Create = () => {
 						<Col
 							xs={6}
 							md={2}
-							className="d-flex align-items-center justify-content-center"
+							className="img-container d-flex align-items-center justify-content-center"
 						>
 							<div className="mb-3">
 								<ImageUploading

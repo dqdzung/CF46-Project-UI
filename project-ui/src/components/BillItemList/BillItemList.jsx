@@ -15,7 +15,7 @@ const Item = ({ item, onClick, onValueChange, setDisable }) => {
 				<input
 					className="quantity"
 					type="number"
-					min={item.quantity}
+					min={1}
 					value={item.quantity}
 					onChange={handleChange}
 				/>

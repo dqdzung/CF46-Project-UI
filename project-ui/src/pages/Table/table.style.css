@@ -4,3 +4,7 @@
 	border-radius: 15px;
 	border: solid 5px white;
 }
+
+.search-input {
+	width: 90%;
+}

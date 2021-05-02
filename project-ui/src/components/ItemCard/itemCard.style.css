@@ -3,6 +3,9 @@
 }
 
 .item-card .card-body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	text-align: center;
 	padding: 5px;
 }
@@ -11,4 +14,10 @@
 	position: absolute;
 	top: 5px;
 	right: 0;
+}
+
+.item-card {
+	border: 1px solid red;
+	border-radius: 5px;
+	padding-top: 10px;
 }
