@@ -105,10 +105,21 @@ const Table = () => {
 		}
 	};
 
-	const handleCheckOut = () => {
+	const handleCheckOut = async () => {
 		if (window.confirm("Do you want to check out?")) {
 			setBillItems([]);
-			console.log("checked out table", tableId);
+			try {
+				const res = await axios({
+					url: `${process.env.REACT_APP_BASE_URL}/api/bill/${tableId}`,
+					method: "DELETE",
+				});
+
+				if (res.data.success) {
+					console.log("checked out", res.data.data);
+				}
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	};
 

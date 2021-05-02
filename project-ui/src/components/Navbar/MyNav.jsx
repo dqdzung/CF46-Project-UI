@@ -1,4 +1,4 @@
-import { Navbar, Nav, Container } from "react-bootstrap";
+import { Navbar, Nav, Container, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import icon from "./icon.png";
 import { useContext } from "react";
@@ -6,6 +6,16 @@ import { AuthContext } from "../../App";
 
 const MyNav = () => {
 	const { user, setUser } = useContext(AuthContext);
+
+	const handleLogout = () => {
+		const logOutConfirm = window.confirm("Are you sure?");
+
+		if (logOutConfirm) {
+			localStorage.removeItem("token");
+			setUser(null);
+		}
+	};
+
 	return (
 		<div>
 			<Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
@@ -46,6 +56,14 @@ const MyNav = () => {
 										<Navbar.Text>Create</Navbar.Text>
 									</Link>
 								</Nav.Item>
+								<Nav className="ml-auto">
+									<Navbar.Text>Welcome,</Navbar.Text>
+									<NavDropdown title={user.email} id="basic-nav-dropdown">
+										<NavDropdown.Item onClick={handleLogout}>
+											Logout
+										</NavDropdown.Item>
+									</NavDropdown>
+								</Nav>
 							</Navbar.Collapse>
 						</>
 					)}
