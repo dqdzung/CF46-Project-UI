@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import TableCard from "../../components/TableCard/TableCard";
+import Loading from "../../components/Loading/Loading";
 import { CardDeck, Container } from "react-bootstrap";
 import "./home.style.css";
 
 const CardList = (props) => {
 	const [bills, setBills] = useState([]);
+	const [loading, setLoading] = useState(true);
 
 	const fetchBills = async () => {
 		try {
@@ -16,6 +18,7 @@ const CardList = (props) => {
 
 			if (res.data.success) {
 				setBills(res.data.data);
+				setLoading(false);
 			}
 		} catch (err) {
 			console.log(err);
@@ -37,6 +40,8 @@ const CardList = (props) => {
 		}
 		return <TableCard key={number} number={number}></TableCard>;
 	});
+
+	if (loading) return <Loading></Loading>;
 
 	return <>{listItems}</>;
 };

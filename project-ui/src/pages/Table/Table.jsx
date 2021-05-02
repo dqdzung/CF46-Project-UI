@@ -105,6 +105,13 @@ const Table = () => {
 		}
 	};
 
+	const handleCheckOut = () => {
+		if (window.confirm("Do you want to check out?")) {
+			setBillItems([]);
+			console.log("checked out table", tableId);
+		}
+	};
+
 	return (
 		<Container fluid>
 			<Row className="p-2">
@@ -125,6 +132,7 @@ const Table = () => {
 						onClick={removeItem}
 						onChange={handleChange}
 						onClickOrder={handleSubmitOrder}
+						onCheckOut={handleCheckOut}
 					></BillItemList>
 				</Col>
 			</Row>

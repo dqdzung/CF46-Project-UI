@@ -70,7 +70,13 @@ const BillItemList = (props) => {
 						>
 							Order
 						</Button>
-						<Button variant="success" className="m-1">
+						<Button
+							onClick={() => {
+								props.onCheckOut();
+							}}
+							variant="success"
+							className="m-1"
+						>
 							Check Out
 						</Button>
 					</div>
