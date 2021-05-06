@@ -127,9 +127,12 @@ const Table = () => {
 
 	const handleSearchInput = (e) => {
 		setTerm(e.target.value);
+
+		const searchRegExp = new RegExp(e.target.value, "ig");
 		const results = items.filter((elem) => {
-			return elem.name.toLowerCase().includes(e.target.value.toLowerCase());
+			return elem.name.match(searchRegExp);
 		});
+
 		setResults(results);
 	};
 
