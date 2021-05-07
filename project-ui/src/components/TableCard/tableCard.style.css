@@ -1,3 +1,11 @@
 .busy {
 	background-color: red;
 }
+
+.grow {
+	transition: all 0.2s;
+}
+
+.grow:hover {
+	transform: scale(1.05);
+}

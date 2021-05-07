@@ -9,9 +9,12 @@ const Item = ({ item, onClick, onValueChange, setDisable }) => {
 		setDisable(false);
 	};
 	return (
-		<Row item={item} className="p-2">
-			<Col md={5}>{item.name}</Col>
-			<Col md={2}>
+		<Row
+			item={item}
+			className="p-2 d-flex align-items-center justify-content-center"
+		>
+			<Col>{item.name}</Col>
+			<Col>
 				<input
 					className="quantity"
 					type="number"
@@ -20,10 +23,10 @@ const Item = ({ item, onClick, onValueChange, setDisable }) => {
 					onChange={handleChange}
 				/>
 			</Col>
-			<Col md={3}>x {item.price}k</Col>
-			<Col md={2} className="delete" onClick={onClick}>
-				X
-			</Col>
+			<Col>x {item.price}k</Col>
+			<Button className="delete btn-danger" onClick={onClick}>
+				Delete
+			</Button>
 		</Row>
 	);
 };
@@ -51,38 +54,42 @@ const BillItemList = (props) => {
 	));
 
 	return (
-		<Form>
-			{listItems}
-			{items.length > 0 && (
-				<>
-					<Row className="total-wrapper">
-						<Col>Total:</Col>
-						<Col className="text-right">{total}</Col>
-					</Row>
-					<div className="button-container d-flex justify-content-center mt-4">
-						<Button
-							className="m-1"
-							onClick={() => {
-								props.onClickOrder(total);
-								setDisable(!disable);
-							}}
-							disabled={disable}
-						>
-							Order
-						</Button>
-						<Button
-							onClick={() => {
-								props.onCheckOut();
-							}}
-							variant="success"
-							className="m-1"
-						>
-							Check Out
-						</Button>
-					</div>
-				</>
-			)}
-		</Form>
+		<>
+			<Form>
+				{listItems}
+				{items.length ? (
+					<>
+						<Row className="total-wrapper">
+							<Col>Total:</Col>
+							<Col className="text-right">{total}</Col>
+						</Row>
+						<div className="button-container d-flex justify-content-center mt-4">
+							<Button
+								className="m-1"
+								onClick={() => {
+									props.onClickOrder(total);
+									setDisable(!disable);
+								}}
+								disabled={disable}
+							>
+								Order
+							</Button>
+							<Button
+								onClick={() => {
+									props.onCheckOut();
+								}}
+								variant="success"
+								className="m-1"
+							>
+								Check Out
+							</Button>
+						</div>
+					</>
+				) : (
+					<h4>No orders yet!</h4>
+				)}
+			</Form>
+		</>
 	);
 };
 

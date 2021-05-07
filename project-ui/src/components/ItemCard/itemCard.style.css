@@ -1,5 +1,5 @@
 .badge {
-	border-radius: 0px;
+	border-radius: 5px 0 0 5px;
 }
 
 .item-card .card-body {
@@ -12,12 +12,19 @@
 
 .badge-container {
 	position: absolute;
-	top: 5px;
+	top: 5%;
 	right: 0;
 }
 
 .item-card {
-	border: 1px solid red;
-	border-radius: 5px;
+	border-radius: 10px;
 	padding-top: 10px;
+}
+
+.grow {
+	transition: all 0.2s ease-in-out;
+}
+
+.grow:hover {
+	transform: scale(1.05);
 }

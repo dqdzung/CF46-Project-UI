@@ -5,7 +5,7 @@ const ItemCard = (props) => {
 	const { name, price, imgUrl } = props.item;
 
 	return (
-		<Card className="item-card" onClick={props.onClick}>
+		<Card className="item-card grow" onClick={props.onClick}>
 			<div className="badge-container">
 				<h4>
 					<Badge className="badge" variant="success">

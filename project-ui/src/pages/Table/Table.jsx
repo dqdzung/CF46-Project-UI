@@ -52,7 +52,7 @@ const Table = () => {
 	useEffect(() => {
 		fetchItems();
 		fetchTableBill();
-	}, []);
+	});
 
 	const handleAddBill = (item) => {
 		if (billItems.some((elem) => elem.id === item._id)) {
