@@ -28,3 +28,7 @@
 .grow:hover {
 	transform: scale(1.05);
 }
+
+.ordered {
+	opacity: 0.5;
+}

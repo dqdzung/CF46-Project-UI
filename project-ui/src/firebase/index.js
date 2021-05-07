@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/firebase-storage";
+import "font-awesome/css/font-awesome.min.css";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyATYkAU4WRhYWsjkC5gp9IH-PWRUZwV3eE",

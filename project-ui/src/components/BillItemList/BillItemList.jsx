@@ -11,7 +11,7 @@ const Item = ({ item, onClick, onValueChange, setDisable }) => {
 	return (
 		<Row
 			item={item}
-			className="p-2 d-flex align-items-center justify-content-center"
+			className="p-2 d-flex align-items-center justify-content-center item"
 		>
 			<Col>{item.name}</Col>
 			<Col>
@@ -59,9 +59,9 @@ const BillItemList = (props) => {
 				{listItems}
 				{items.length ? (
 					<>
-						<Row className="total-wrapper">
+						<Row className="total-wrapper mt-4">
 							<Col>Total:</Col>
-							<Col className="text-right">{total}</Col>
+							<Col className="text-right total">{total}</Col>
 						</Row>
 						<div className="button-container d-flex justify-content-center mt-4">
 							<Button

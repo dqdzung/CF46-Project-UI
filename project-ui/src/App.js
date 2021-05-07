@@ -46,7 +46,7 @@ function App() {
 		fetchUser();
 	}, []);
 
-	if (loading) return <Loading></Loading>;
+	if (loading) return <h1>Loading...</h1>;
 
 	return (
 		<div className="App">
