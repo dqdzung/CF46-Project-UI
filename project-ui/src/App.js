@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
 import { useState, useEffect, createContext } from "react";
 import client from "./api";
 import MainLayout from "./components/Layout/MainLayout";
@@ -46,36 +47,40 @@ function App() {
 		fetchUser();
 	}, []);
 
-	if (loading) return <h1>Loading...</h1>;
-
 	return (
 		<div className="App">
-			<AuthContext.Provider value={{ user, setUser }}>
-				<Router>
-					<MainLayout>
-						<Switch>
-							<Protected path="/" exact>
-								<Home></Home>
-							</Protected>
-							<Protected path="/create">
-								<Create></Create>
-							</Protected>
-							<Protected path="/table/:id">
-								<Table></Table>
-							</Protected>
-							<Route path="/login">
-								<Login></Login>
-							</Route>
-							<Route path="/signup">
-								<SignUp></SignUp>
-							</Route>
-							<Route path="*">
-								<h1>404</h1>
-							</Route>
-						</Switch>
-					</MainLayout>
-				</Router>
-			</AuthContext.Provider>
+			{loading ? (
+				<h1 className="test">
+					<Loading />
+				</h1>
+			) : (
+				<AuthContext.Provider value={{ user, setUser }}>
+					<Router>
+						<MainLayout>
+							<Switch>
+								<Protected path="/" exact>
+									<Home></Home>
+								</Protected>
+								<Protected path="/create">
+									<Create></Create>
+								</Protected>
+								<Protected path="/table/:id">
+									<Table></Table>
+								</Protected>
+								<Route path="/login">
+									<Login></Login>
+								</Route>
+								<Route path="/signup">
+									<SignUp></SignUp>
+								</Route>
+								<Route path="*">
+									<h1 className="test">404, nothing to see here!</h1>
+								</Route>
+							</Switch>
+						</MainLayout>
+					</Router>
+				</AuthContext.Provider>
+			)}
 		</div>
 	);
 }

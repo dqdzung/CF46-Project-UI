@@ -1,4 +1,4 @@
-import { Card, Badge } from "react-bootstrap";
+import { Card, Badge, Row, Col } from "react-bootstrap";
 import "./itemCard.style.css";
 
 const ItemCard = (props) => {
@@ -13,7 +13,9 @@ const ItemCard = (props) => {
 					</Badge>
 				</h4>
 			</div>
-			<Card.Img variant="top" src={imgUrl} />
+			<div className="image-container">
+				<Card.Img variant="top" src={imgUrl} />
+			</div>
 			<Card.Body>
 				<Card.Title>{name}</Card.Title>
 			</Card.Body>
